@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <NuxtLayout>
-            <AppHeader />
+    <NuxtLayout>
+        <AppHeader />
+        <div class="mx-10">
             <NuxtPage />
-        </NuxtLayout>
-    </div>
+        </div>
+    </NuxtLayout>
 </template>
