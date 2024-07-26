@@ -1,21 +1,32 @@
 <template>
     <div>
-        <div class="flex mb-6">
-            <URadio
-                v-for="option in options"
-                :key="option.value"
-                v-model="sortingOption"
-                v-bind="option"
-                class="ml-4"
-            />
-        </div>
+        <UAlert
+            v-if="resultsList.length === 0"
+            icon="i-heroicons-exclamation-circle"
+            color="blue"
+            title="It seems that no one has played yet."
+            description="Go ahead and be the first to challenge others!"
+            class="mb-4 dark:text-white max-w-[400px]"
+        />
 
-        <div v-for="(result, i) in sortedResultsList" :key="i" class="my-4">
-            <div>
-                - {{ result.username }} :
-                <span class="text-primary italic">{{ result.result }} ms</span>
+        <div v-else>
+            <div class="flex mb-6">
+                <URadio
+                    v-for="option in options"
+                    :key="option.value"
+                    v-model="sortingOption"
+                    v-bind="option"
+                    class="ml-4"
+                />
             </div>
-            <UDivider class="mt-4" />
+
+            <div v-for="(result, i) in sortedResultsList" :key="i" class="my-4">
+                <div>
+                    - {{ result.username }} :
+                    <span class="text-primary italic">{{ result.result }} ms</span>
+                </div>
+                <UDivider class="mt-4" />
+            </div>
         </div>
     </div>
 </template>
