@@ -6,3 +6,7 @@
         </div>
     </NuxtLayout>
 </template>
+
+<script setup lang="ts">
+useState<PrediReflexResult[]>(EStateKeys.PrediReflexResults, () => []);
+</script>

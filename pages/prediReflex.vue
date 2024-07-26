@@ -81,6 +81,8 @@ enum EPrediReflexState {
 
 const SQUARE_SIZE: number = 150;
 
+const resultList = useState<PrediReflexResult[]>(EStateKeys.PrediReflexResults);
+
 const username = ref<string>();
 const color = ref<string>('rgb(255,140,8)');
 const delay = ref<number>(4); // in seconds
@@ -112,8 +114,12 @@ const startGame = (): void => {
 const onSquareClick = (): void => {
     showSquare.value = false;
     state.value = EPrediReflexState.FINISHED;
-    if (squareAppearedAt.value) {
+    if (squareAppearedAt.value && username.value) {
         gameResult.value = Date.now() - squareAppearedAt.value;
+        resultList.value.push({
+            username: username.value,
+            result: gameResult.value,
+        });
     }
 };
 </script>
