@@ -21,6 +21,11 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({
+    title: 'Ranking',
+    description: 'Challenge others and become the best.',
+});
+
 enum ESortOptions {
     ASC = 'asc',
     DESC = 'desc',

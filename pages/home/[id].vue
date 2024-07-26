@@ -31,6 +31,11 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({
+    title: 'Home - Post details',
+    description: 'Details of a post.',
+});
+
 const route = useRoute();
 
 const { status, data: post, error } = useLazyFetch<Post>(`/api/post/${route.params.id}`);

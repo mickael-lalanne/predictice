@@ -29,6 +29,11 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({
+    title: 'Predi Reflex',
+    description: 'Test your rapidity !',
+});
+
 enum EPrediReflexState {
     FORM,
     PLAYING,

@@ -21,6 +21,11 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({
+    title: 'Home',
+    description: 'A list of the best posts.',
+});
+
 const { data } = await useFetch<Post[]>('/api/posts');
 
 const onPostClick = async (post: Post) => {
