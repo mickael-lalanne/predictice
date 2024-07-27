@@ -31,3 +31,16 @@ jobs:
         with:
           name: vitest-report
           path: html
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git setup
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install
+  
+      - name: Run linter
+        run: npm run lint

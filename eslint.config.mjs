@@ -12,6 +12,16 @@ export default withNuxt(
                     multiline: { max: 1 },
                 },
             ],
+            'vue/html-self-closing': [
+                'warn',
+                {
+                    html: {
+                        void: 'never',
+                        normal: 'never',
+                        component: 'always',
+                    },
+                },
+            ],
         },
     },
 );
