@@ -5,23 +5,9 @@ import ReflexGameForm from '~/components/reflex/GameForm.vue';
 import ReflexGameSquare from '~/components/reflex/GameSquare.vue';
 import ReflexGameResult from '~/components/reflex/GameResult.vue';
 
-const MockVerte = {
-    template: '<div></div>',
-    props: ['picker', 'model'],
-    emits: ['update:modelValue'],
-};
-
-const mountOptions = {
-    global: {
-        stubs: {
-            Verte: MockVerte,
-        },
-    },
-};
-
 describe('PrediReflex', () => {
     it('renders game form initially', () => {
-        const wrapper = mount(PrediReflex, mountOptions);
+        const wrapper = mount(PrediReflex);
 
         expect(wrapper.findComponent(ReflexGameForm).exists()).toBe(true);
         expect(wrapper.findComponent(ReflexGameSquare).exists()).toBe(false);
@@ -29,7 +15,7 @@ describe('PrediReflex', () => {
     });
 
     it('renders game square when state is PLAYING', async () => {
-        const wrapper = mount(PrediReflex, mountOptions);
+        const wrapper = mount(PrediReflex);
 
         // Simulate filling in the form and starting the game
         await wrapper.findComponent(ReflexGameForm).vm.$emit('startGame');
@@ -40,7 +26,7 @@ describe('PrediReflex', () => {
     });
 
     it('renders game result when square is clicked', async () => {
-        const wrapper = mount(PrediReflex, mountOptions);
+        const wrapper = mount(PrediReflex);
 
         // Start the game
         await wrapper.findComponent(ReflexGameForm).vm.$emit('startGame');
@@ -57,7 +43,7 @@ describe('PrediReflex', () => {
     });
 
     it('restarts the game when restart button is clicked', async () => {
-        const wrapper = mount(PrediReflex, mountOptions);
+        const wrapper = mount(PrediReflex);
 
         // Start the game
         await wrapper.findComponent(ReflexGameForm).vm.$emit('startGame');

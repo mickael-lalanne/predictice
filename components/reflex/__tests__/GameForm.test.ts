@@ -1,19 +1,9 @@
 import { mount } from '@vue/test-utils';
 import { describe, it, expect } from 'vitest';
 import GameForm from '~/components/reflex/GameForm.vue';
-
-const MockVerte = {
-    template: '<div></div>',
-    props: ['picker', 'model'],
-    emits: ['update:modelValue'],
-};
+import { MockVerte } from '~/vitest.setup';
 
 const mountOptions = {
-    global: {
-        stubs: {
-            Verte: MockVerte,
-        },
-    },
     props: {
         username: 'Bruce Wayne',
         color: 'rgb(255,140,8)',
