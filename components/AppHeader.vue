@@ -29,7 +29,7 @@
                 variant="ghost"
                 aria-label="Theme"
                 class="px-4"
-                @click="isDark = !isDark"
+                @click="toggleDarkMode"
             />
         </div>
     </div>
@@ -37,14 +37,16 @@
 
 <script setup lang="ts">
 const colorMode = useColorMode();
-const isDark = computed({
-    get() {
-        return colorMode.value === 'dark';
-    },
-    set() {
-        colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
-    },
+const isDark = ref<boolean>(false);
+
+onMounted(() => {
+    isDark.value = colorMode.value === 'dark';
 });
+
+const toggleDarkMode = (): void => {
+    isDark.value = !isDark.value;
+    colorMode.preference = isDark.value ? 'dark' : 'light';
+};
 
 type Link = {
     label: string;

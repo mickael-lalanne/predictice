@@ -9,6 +9,7 @@
                 v-model="color"
                 picker="square"
                 model="rgb"
+                :show-history="false"
                 @update:model-value="color = $event"
             />
         </UFormGroup>
