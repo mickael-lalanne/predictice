@@ -2,7 +2,11 @@
 export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
     devtools: { enabled: true },
-    modules: ['@nuxt/eslint', '@nuxt/ui'],
+    modules: [
+        '@nuxt/eslint',
+        '@nuxt/ui',
+        '@nuxt/test-utils/module',
+    ],
     imports: {
         dirs: ['models/*.ts'],
     },

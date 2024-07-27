@@ -25,7 +25,11 @@
             </div>
         </UFormGroup>
 
-        <UTooltip :text="startButtonTooltip" :prevent="!startButtonDisabled" class="w-full">
+        <UTooltip
+            :text="startButtonTooltip"
+            :prevent="!startButtonDisabled"
+            class="w-full"
+        >
             <UButton
                 label="Here we go !"
                 class="mt-12 p-4"
