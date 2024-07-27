@@ -10,23 +10,35 @@
         />
 
         <div v-else>
-            <div class="flex mb-6">
-                <URadio
-                    v-for="option in options"
-                    :key="option.value"
-                    v-model="sortingOption"
-                    v-bind="option"
-                    class="ml-4"
+            <div class="flex justify-end">
+                <UButton
+                    label="Wan't to see an alternative ? 👀"
+                    class=""
+                    @click="toggleRankingMode"
                 />
             </div>
 
-            <div v-for="(result, i) in sortedResultsList" :key="i" class="my-4">
-                <div>
-                    - {{ result.username }} :
-                    <span class="text-primary italic">{{ result.result }} ms</span>
+            <div v-if="rankingMode === ERankingMode.LIST">
+                <div class="flex mb-6">
+                    <URadio
+                        v-for="option in listOptions"
+                        :key="option.value"
+                        v-model="sortingOption"
+                        v-bind="option"
+                        class="ml-4"
+                    />
                 </div>
-                <UDivider class="mt-4" />
+
+                <div v-for="(result, i) in sortedResultsList" :key="i" class="my-4">
+                    <div>
+                        - {{ result.username }} :
+                        <span class="text-primary italic">{{ result.result }} ms</span>
+                    </div>
+                    <UDivider class="mt-4" />
+                </div>
             </div>
+
+            <UTable v-else :columns="tableColumns" :rows="resultsList" />
         </div>
     </div>
 </template>
@@ -42,18 +54,36 @@ enum ESortOptions {
     DESC = 'desc',
 }
 
+enum ERankingMode {
+    LIST = 'list',
+    TABLE = 'table',
+}
+
 const resultsList = useState<PrediReflexResult[]>(
     EStateKeys.PrediReflexResults,
 );
 
 const sortingOption = ref<ESortOptions>(ESortOptions.ASC);
+const rankingMode = ref<ERankingMode>(ERankingMode.LIST);
 
 const sortedResultsList = computed<PrediReflexResult[]>(() =>
     sortArray([...resultsList.value], 'result', sortingOption.value),
 );
 
-const options = [
+const listOptions = [
     { label: 'Best time', value: ESortOptions.ASC },
     { label: 'Dirty time', value: ESortOptions.DESC },
 ];
+
+const tableColumns = [
+    { label: 'Username', key: 'username' },
+    { label: 'Result', key: 'result', sortable: true },
+];
+
+const toggleRankingMode = (): void => {
+    rankingMode.value
+        = rankingMode.value === ERankingMode.LIST
+            ? ERankingMode.TABLE
+            : ERankingMode.LIST;
+};
 </script>
