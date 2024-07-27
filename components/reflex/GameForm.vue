@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-[200px]">
+    <div>
         <UFormGroup label="Player Name" class="mb-4">
             <UInput v-model="username" placeholder="Bruce Wayne" />
         </UFormGroup>
@@ -25,13 +25,15 @@
             </div>
         </UFormGroup>
 
-        <UButton
-            label="Here we go !"
-            class="mt-12 p-4"
-            block
-            :disabled="!username || delay < 1 || !color"
-            @click="() => $emit('startGame')"
-        />
+        <UTooltip :text="startButtonTooltip" :prevent="!startButtonDisabled" class="w-full">
+            <UButton
+                label="Here we go !"
+                class="mt-12 p-4"
+                block
+                :disabled="startButtonDisabled"
+                @click="() => $emit('startGame')"
+            />
+        </UTooltip>
     </div>
 </template>
 
@@ -44,6 +46,22 @@ const color = defineModel('color', { type: String, required: true });
 const delay = defineModel('delay', { type: Number, required: true });
 
 const secondsLabel = computed<string>(() => (delay.value > 1 ? 'secs' : 'sec'));
+const startButtonDisabled = computed<boolean>(() => !username.value || delay.value < 1 || !color.value);
+const startButtonTooltip = computed<string>(() => {
+    let tooltipMessage: string = '';
+
+    if (!username.value) {
+        tooltipMessage += '- Enter your username ';
+    }
+    if (delay.value < 1) {
+        tooltipMessage += '- Delay must be at least 1 second ';
+    }
+    if (!color.value) {
+        tooltipMessage += '- Choose a color ';
+    }
+
+    return tooltipMessage;
+});
 
 defineEmits<{
     startGame: [];
