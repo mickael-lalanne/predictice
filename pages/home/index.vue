@@ -3,7 +3,7 @@
         <UCard
             v-for="post in data"
             :key="post.id"
-            class="mb-5 cursor-pointer dark:hover:outline dark:hover:outline-1 dark:hover:outline-primary w-1/2"
+            class="mb-5 cursor-pointer hover:outline hover:outline-1 hover:outline-primary dark:hover:outline-primary w-1/2"
             @click="onPostClick(post)"
         >
             <template #header>

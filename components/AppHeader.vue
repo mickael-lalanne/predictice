@@ -1,22 +1,51 @@
 <template>
     <div
-        class="border-b border-gray-200 dark:border-gray-800 flex justify-center mb-5"
+        class="border-b border-gray-200 dark:border-gray-800 flex justify-between mb-5"
     >
-        <ULink
-            v-for="link in links"
-            :key="link.label"
-            :to="link.to"
-            :active="isActiveLink(link.to)"
-            class="px-4 py-2"
-            active-class="text-primary"
-            inactive-class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
-        >
-            {{ link.label }}
-        </ULink>
+        <div class="flex-1"></div>
+
+        <div class="flex justify-center space-x-4">
+            <ULink
+                v-for="link in links"
+                :key="link.label"
+                :to="link.to"
+                :active="isActiveLink(link.to)"
+                class="px-4 py-2"
+                active-class="text-primary"
+                inactive-class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+            >
+                {{ link.label }}
+            </ULink>
+        </div>
+
+        <div class="flex-1 flex justify-end">
+            <UButton
+                :icon="
+                    isDark
+                        ? 'i-heroicons-moon-20-solid'
+                        : 'i-heroicons-sun-20-solid'
+                "
+                color="gray"
+                variant="ghost"
+                aria-label="Theme"
+                class="px-4"
+                @click="isDark = !isDark"
+            />
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
+const colorMode = useColorMode();
+const isDark = computed({
+    get() {
+        return colorMode.value === 'dark';
+    },
+    set() {
+        colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
+    },
+});
+
 type Link = {
     label: string;
     to: string;
