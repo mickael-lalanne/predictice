@@ -7,18 +7,19 @@
             title="It seems that no one has played yet."
             description="Go ahead and be the first to challenge others!"
             class="mb-4 dark:text-white max-w-[400px]"
+            data-test="no-results-message"
         />
 
         <div v-else>
             <div class="flex justify-end">
                 <UButton
                     label="Wan't to see an alternative ? 👀"
-                    class=""
+                    data-test="alternative-button"
                     @click="toggleRankingMode"
                 />
             </div>
 
-            <div v-if="rankingMode === ERankingMode.LIST">
+            <div v-if="rankingMode === ERankingMode.LIST" data-test="list-view">
                 <div class="flex mb-6">
                     <URadio
                         v-for="option in listOptions"
@@ -26,11 +27,12 @@
                         v-model="sortingOption"
                         v-bind="option"
                         class="ml-4"
+                        data-test="sorting-option"
                     />
                 </div>
 
                 <div v-for="(result, i) in sortedResultsList" :key="i" class="my-4">
-                    <div>
+                    <div data-test="user-result">
                         - {{ result.username }} :
                         <span class="text-primary italic">{{ result.result }} ms</span>
                     </div>
@@ -38,7 +40,12 @@
                 </div>
             </div>
 
-            <UTable v-else :columns="tableColumns" :rows="resultsList" />
+            <UTable
+                v-else
+                :columns="tableColumns"
+                :rows="resultsList"
+                data-test="table-view"
+            />
         </div>
     </div>
 </template>
