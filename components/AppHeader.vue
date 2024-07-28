@@ -56,7 +56,7 @@ type Link = {
 const links: Link[] = [
     {
         label: 'Home',
-        to: '/home',
+        to: '/',
     },
     {
         label: 'PrediReflex',
