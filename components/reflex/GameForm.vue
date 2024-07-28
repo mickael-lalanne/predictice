@@ -1,7 +1,7 @@
 <template>
     <div>
         <UFormGroup label="Player Name" class="mb-4">
-            <UInput v-model="username" placeholder="Bruce Wayne" />
+            <UInput v-model="username" placeholder="Bruce Wayne" maxlength="20" />
         </UFormGroup>
 
         <UFormGroup label="Color" class="mb-4">
