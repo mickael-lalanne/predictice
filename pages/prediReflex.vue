@@ -44,7 +44,7 @@ const resultList = useState<PrediReflexResult[]>(EStateKeys.PrediReflexResults);
 
 const state = ref<EPrediReflexState>(EPrediReflexState.FORM);
 const username = ref<string>();
-const squareColor = ref<string>('rgb(255,140,8)');
+const squareColor = ref<string>('rgb(0,125,255)');
 const delay = ref<number>(4); // in seconds
 const gameResult = ref<number>(); // in milliseconds
 
