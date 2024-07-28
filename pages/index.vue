@@ -4,6 +4,7 @@
             v-for="post in data"
             :key="post.id"
             class="mb-5 cursor-pointer hover:outline hover:outline-1 hover:outline-primary dark:hover:outline-primary w-1/2"
+            data-test="post-card"
             @click="onPostClick(post)"
         >
             <template #header>
