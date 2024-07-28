@@ -1,75 +1,110 @@
-# Nuxt 3 Minimal Starter
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a name="readme-top"></a>
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+    <img src="public/favicon.ico" alt="Logo" width="32" height="32">
 
-## Setup
+  <h3 align="center">Predi Reflex</h3>
 
-Make sure to install the dependencies:
+  <p align="center">
+      By Mickaël Lalanne
+  </p>
+</div>
 
-```bash
-# npm
-npm install
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project-🧐">About The Project 🧐</a>
+      <ul>
+        <li><a href="#built-with-⛏">Built With ⛏</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites-📜">Prerequisites 📜</a></li>
+        <li><a href="#installation-🛠️">Installation 🛠️</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact-☎️">Contact ☎️</a></li>
+  </ol>
+</details>
 
-# pnpm
-pnpm install
+<!-- ABOUT THE PROJECT -->
+## About the project 🧐
 
-# yarn
-yarn install
+Challenge for Predictice.
+The application is divided in 4 pages :
+1. Home page : list of 5 first post from external API
+2. Home detail page: detail of a post
+3. PrediReflex page: game to verify your reflex
+4. Ranking page: get the best results of players
 
-# bun
-bun install
-```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Development Server
+### Built With ⛏
 
-Start the development server on `http://localhost:3000`:
+* ![Nuxt.js](https://img.shields.io/badge/Nuxt.js-002E3B?logo=nuxtdotjs&logoColor=#00DC82)
+* ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white)
+* ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)
+* ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?logo=githubactions&logoColor=white)
 
-```bash
-# npm
-npm run dev
+And also [Nuxt UI](https://ui.nuxt.com/) for the Design library and [Vitest](https://vitest.dev/) for the tests.
 
-# pnpm
-pnpm run dev
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# yarn
-yarn dev
+<!-- GETTING STARTED -->
+## Getting Started
 
-# bun
-bun run dev
-```
+### Prerequisites 📜
 
-## Production
+* [Nodejs](https://nodejs.org/en) `v18.0.0` or newer
 
-Build the application for production:
+### Installation 🛠️
 
-```bash
-# npm
-npm run build
+1. Clone the repo
+   ```sh
+   https://github.com/mickael-lalanne/predictice.git
+   ```
+2. Install dependencies
+   ```sh
+   npm install
+   ```
+5. Run the app locally
+   ```sh
+   npm run dev
+   ```
 
-# pnpm
-pnpm run build
+### Run tests 🤖
 
-# yarn
-yarn build
+Run test locally
+   ```sh
+   npx vitest
+   ```
+You can also generate an HTML report
+   ```sh
+   npx vitest --reporter=html
+   ```
+Then, if you want to to look at the report
+   ```sh
+   npx vite preview --outDir html
+   ```
 
-# bun
-bun run build
-```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Locally preview production build:
+<!-- CONTACT -->
+## Contact ☎️
 
-```bash
-# npm
-npm run preview
+Mickaël Lalanne - mickael.lalanne03@gmail.com
 
-# pnpm
-pnpm run preview
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-# yarn
-yarn preview
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+<!-- MARKDOWN LINKS & IMAGES -->
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/mickael-lalanne/
