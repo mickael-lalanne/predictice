@@ -71,6 +71,10 @@ const links: Link[] = [
 const route = useRoute();
 
 const isActiveLink = (path: string) => {
-    return route.path === path || route.path.startsWith(`${path}/`);
+    return (
+        route.path === path
+        || route.path.startsWith(`${path}/`)
+        || (path === '/' && route.path.startsWith('/home'))
+    );
 };
 </script>
