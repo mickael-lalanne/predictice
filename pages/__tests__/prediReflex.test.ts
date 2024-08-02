@@ -1,13 +1,21 @@
 import { mount } from '@vue/test-utils';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import PrediReflex from '~/pages/prediReflex.vue';
 import ReflexGameForm from '~/components/reflex/GameForm.vue';
 import ReflexGameSquare from '~/components/reflex/GameSquare.vue';
 import ReflexGameResult from '~/components/reflex/GameResult.vue';
 
+const mountOptions = {
+    global: {
+        mocks: {
+            $t: vi.fn().mockImplementation((key: string) => key),
+        },
+    },
+};
+
 describe('PrediReflex', () => {
     it('renders game form initially', () => {
-        const wrapper = mount(PrediReflex);
+        const wrapper = mount(PrediReflex, mountOptions);
 
         expect(wrapper.findComponent(ReflexGameForm).exists()).toBe(true);
         expect(wrapper.findComponent(ReflexGameSquare).exists()).toBe(false);
@@ -15,7 +23,7 @@ describe('PrediReflex', () => {
     });
 
     it('renders game square when state is PLAYING', async () => {
-        const wrapper = mount(PrediReflex);
+        const wrapper = mount(PrediReflex, mountOptions);
 
         // Simulate filling in the form and starting the game
         await wrapper.findComponent(ReflexGameForm).vm.$emit('startGame');
@@ -26,7 +34,7 @@ describe('PrediReflex', () => {
     });
 
     it('renders game result when square is clicked', async () => {
-        const wrapper = mount(PrediReflex);
+        const wrapper = mount(PrediReflex, mountOptions);
 
         // Start the game
         await wrapper.findComponent(ReflexGameForm).vm.$emit('startGame');
@@ -43,7 +51,7 @@ describe('PrediReflex', () => {
     });
 
     it('restarts the game when restart button is clicked', async () => {
-        const wrapper = mount(PrediReflex);
+        const wrapper = mount(PrediReflex, mountOptions);
 
         // Start the game
         await wrapper.findComponent(ReflexGameForm).vm.$emit('startGame');

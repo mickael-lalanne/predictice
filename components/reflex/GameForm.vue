@@ -21,8 +21,11 @@
                     type="number"
                     class="w-[75px]"
                     min="0"
+                    @keydown="onDelayInputKeydown"
                 />
-                <span class="ml-2">{{ secondsLabel }}</span>
+                <span class="ml-2" data-test="plurality-label">
+                    {{ $t('seconds', delay) }}
+                </span>
             </div>
         </UFormGroup>
 
@@ -43,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+// @ts-expect-error Verte is not typed
 import Verte from 'verte-vue3';
 import 'verte-vue3/dist/verte.css';
 
@@ -50,7 +54,6 @@ const username = defineModel('username', { type: String });
 const color = defineModel('color', { type: String, required: true });
 const delay = defineModel('delay', { type: Number, required: true });
 
-const secondsLabel = computed<string>(() => (delay.value > 1 ? 'secs' : 'sec'));
 const startButtonDisabled = computed<boolean>(() => !username.value || delay.value < 1 || !color.value);
 const startButtonTooltip = computed<string>(() => {
     let tooltipMessage: string = '';
@@ -71,6 +74,13 @@ const startButtonTooltip = computed<string>(() => {
 defineEmits<{
     startGame: [];
 }>();
+
+const onDelayInputKeydown = (event: KeyboardEvent) => {
+    // Prevent the user from typing a negative number
+    if (event.key === '-') {
+        event.preventDefault();
+    }
+};
 </script>
 
 <style>

@@ -6,6 +6,7 @@ export default defineNuxtConfig({
         '@nuxt/eslint',
         '@nuxt/ui',
         '@nuxt/test-utils/module',
+        '@nuxtjs/i18n',
     ],
     imports: {
         dirs: ['models/*.ts'],
@@ -18,5 +19,8 @@ export default defineNuxtConfig({
                 semi: true,
             },
         },
+    },
+    i18n: {
+        vueI18n: './i18n.config.ts',
     },
 });

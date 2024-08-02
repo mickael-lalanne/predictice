@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import GameForm from '~/components/reflex/GameForm.vue';
 import { MockVerte } from '~/vitest.setup';
 
@@ -8,6 +8,11 @@ const mountOptions = {
         username: 'Bruce Wayne',
         color: 'rgb(255,140,8)',
         delay: 3,
+    },
+    global: {
+        mocks: {
+            $t: vi.fn().mockImplementation((key: string) => key),
+        },
     },
 };
 
@@ -47,5 +52,16 @@ describe('GameForm', () => {
         // Restore color value => button should be enabled again
         await wrapper.findComponent(MockVerte).vm.$emit('update:modelValue', mountOptions.props.color);
         expect(wrapper.find('button').element.disabled).toBe(false);
+    });
+
+    it('prevents the user from typing a negative delay', async () => {
+        const wrapper = mount(GameForm, mountOptions);
+        const preventDefaultMock = vi.fn();
+
+        await wrapper.find('input[type="number"]').trigger('keydown', { key: '1', preventDefault: preventDefaultMock });
+        expect(preventDefaultMock).not.toHaveBeenCalled();
+
+        await wrapper.find('input[type="number"]').trigger('keydown', { key: '-', preventDefault: preventDefaultMock });
+        expect(preventDefaultMock).toHaveBeenCalled();
     });
 });
