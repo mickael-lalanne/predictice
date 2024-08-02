@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { flushPromises, mount } from '@vue/test-utils';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { mockNuxtImport } from '@nuxt/test-utils/runtime';
 import RankingPage from '~/pages/ranking.vue';
@@ -8,23 +8,41 @@ const mockResultsList: PrediReflexResult[] = [
     { username: 'Player2', result: 456 },
 ];
 
-const { useStateMock } = vi.hoisted(() => {
+const clearResultsMock = vi.fn();
+
+const mockNuxtApp = (results: PrediReflexResult[]) => {
     return {
-        useStateMock: vi.fn().mockImplementation(() => {
-            return { value: mockResultsList };
-        }),
+        $db: {
+            results: {
+                toArray: () => results,
+                clear: clearResultsMock,
+            },
+        },
+        payload: {
+            serverRendered: false,
+        },
+    };
+};
+
+const { useNuxtAppMock } = vi.hoisted(() => {
+    return {
+        useNuxtAppMock: vi.fn().mockImplementation(() =>
+            mockNuxtApp(mockResultsList),
+        ),
     };
 });
 
-mockNuxtImport('useState', () => useStateMock);
+mockNuxtImport('useNuxtApp', () => useNuxtAppMock);
 
 describe('RankingPage', () => {
     afterEach(() => {
-        useStateMock.mockRestore();
+        useNuxtAppMock.mockRestore();
     });
 
     it('toggles ranking mode on button click', async () => {
         const wrapper = mount(RankingPage);
+        await flushPromises();
+
         const button = wrapper.find('[data-test="alternative-button"]');
 
         await button.trigger('click');
@@ -35,11 +53,12 @@ describe('RankingPage', () => {
     });
 
     it('sorts the results list correctly', async () => {
-        useStateMock.mockImplementation(() => {
-            return { value: mockResultsList };
+        useNuxtAppMock.mockImplementation(() => {
+            return mockNuxtApp(mockResultsList);
         });
 
         const wrapper = mount(RankingPage);
+        await flushPromises();
         const radios = wrapper.findAll('[data-test="sorting-option"]');
 
         await radios[1].setValue('desc');
@@ -54,12 +73,28 @@ describe('RankingPage', () => {
     });
 
     it('displays a message when there are no results', async () => {
-        useStateMock.mockImplementation(() => {
-            return [];
+        useNuxtAppMock.mockImplementation(() => {
+            return mockNuxtApp([]);
         });
 
         const wrapper = mount(RankingPage);
 
+        expect(wrapper.find('[data-test="no-results-message"]').exists()).toBe(true);
+    });
+
+    it('clears the results list', async () => {
+        useNuxtAppMock.mockImplementation(() => {
+            return mockNuxtApp(mockResultsList);
+        });
+
+        const wrapper = mount(RankingPage);
+        await flushPromises();
+
+        expect(clearResultsMock).toHaveBeenCalledTimes(0);
+        const button = wrapper.find('[data-test="clear-results-button"]');
+
+        await button.trigger('click');
+        expect(clearResultsMock).toHaveBeenCalledOnce();
         expect(wrapper.find('[data-test="no-results-message"]').exists()).toBe(true);
     });
 });

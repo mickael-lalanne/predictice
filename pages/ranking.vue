@@ -46,6 +46,13 @@
                 :rows="resultsList"
                 data-test="table-view"
             />
+
+            <UButton
+                label="Clear results"
+                class="mt-8"
+                data-test="clear-results-button"
+                @click="clearResults"
+            />
         </div>
     </div>
 </template>
@@ -66,16 +73,19 @@ enum ERankingMode {
     TABLE = 'table',
 }
 
-const resultsList = useState<PrediReflexResult[]>(
-    EStateKeys.PrediReflexResults,
-);
+const { $db } = useNuxtApp();
 
+const resultsList = ref<PrediReflexResult[]>([]);
 const sortingOption = ref<ESortOptions>(ESortOptions.ASC);
 const rankingMode = ref<ERankingMode>(ERankingMode.LIST);
 
 const sortedResultsList = computed<PrediReflexResult[]>(() =>
     sortArray([...resultsList.value], 'result', sortingOption.value),
 );
+
+onMounted(async () => {
+    resultsList.value = await $db.results.toArray();
+});
 
 const listOptions = [
     { label: 'Best time', value: ESortOptions.ASC },
@@ -92,5 +102,10 @@ const toggleRankingMode = (): void => {
         = rankingMode.value === ERankingMode.LIST
             ? ERankingMode.TABLE
             : ERankingMode.LIST;
+};
+
+const clearResults = async (): Promise<void> => {
+    await $db.results.clear();
+    resultsList.value = [];
 };
 </script>

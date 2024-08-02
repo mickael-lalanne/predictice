@@ -40,7 +40,7 @@ enum EPrediReflexState {
     FINISHED,
 }
 
-const resultList = useState<PrediReflexResult[]>(EStateKeys.PrediReflexResults);
+const { $db } = useNuxtApp();
 
 const state = ref<EPrediReflexState>(EPrediReflexState.FORM);
 const username = ref<string>();
@@ -48,12 +48,12 @@ const squareColor = ref<string>('rgb(0,125,255)');
 const delay = ref<number>(4); // in seconds
 const gameResult = ref<number>(); // in milliseconds
 
-const onSquareClick = (score: number): void => {
+const onSquareClick = async (score: number): Promise<void> => {
     state.value = EPrediReflexState.FINISHED;
     gameResult.value = score;
 
     if (username.value) {
-        resultList.value.push({
+        await $db.results.add({
             username: username.value,
             result: score,
         });
