@@ -1,6 +1,6 @@
 <template>
     <div
-        class="border-b border-gray-200 dark:border-gray-800 flex justify-between mb-5"
+        class="sticky top-0 border-b border-gray-200 dark:border-gray-800 flex justify-between mb-5 bg-primary-400 dark:bg-primary-700"
     >
         <div class="flex-1"></div>
 
@@ -11,8 +11,8 @@
                 :to="link.to"
                 :active="isActiveLink(link.to)"
                 class="px-4 py-2"
-                active-class="text-primary"
-                inactive-class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                active-class="text-primary-100 dark:text-white underline"
+                inactive-class="text-primary-900 dark:text-primary-300 hover:text-primary-200 dark:hover:text-gray-200"
             >
                 {{ link.label }}
             </ULink>
