@@ -1,6 +1,7 @@
 <template>
     <div
         class="sticky top-0 border-b border-gray-200 dark:border-gray-800 flex justify-between mb-5 bg-primary-400 dark:bg-primary-700"
+        data-testid="app-header"
     >
         <div class="flex-1"></div>
 

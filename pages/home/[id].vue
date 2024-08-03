@@ -11,19 +11,19 @@
         />
 
         <div v-else>
-            <USkeleton v-if="status === 'pending'" class="h-6 w-full" data-test="skeleton" />
+            <USkeleton v-if="status === 'pending'" class="h-6 w-full" data-testid="skeleton" />
             <div v-else-if="post" class="text-primary flex justify-center">
                 You are currently reading the post : #{{ post.id }}
             </div>
 
             <UDivider label="Title" class="my-4" />
-            <USkeleton v-if="status === 'pending'" class="h-6 w-full" data-test="skeleton" />
+            <USkeleton v-if="status === 'pending'" class="h-6 w-full" data-testid="skeleton" />
             <div v-else-if="post">
                 {{ post.title }}
             </div>
 
             <UDivider label="Description" class="my-4" />
-            <USkeleton v-if="status === 'pending'" class="h-12 w-full" data-test="skeleton" />
+            <USkeleton v-if="status === 'pending'" class="h-12 w-full" data-testid="skeleton" />
             <div v-else-if="post">
                 {{ post.body }}
             </div>

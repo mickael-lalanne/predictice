@@ -23,7 +23,7 @@ describe('DetailedHome', () => {
     it('renders skeletons while loading', async () => {
         const component = await mountSuspended(DetailedHomeComponent, { route: '/home/1' });
 
-        expect(component.findAllComponents('[data-test="skeleton"]').length).toBe(
+        expect(component.findAllComponents('[data-testid="skeleton"]').length).toBe(
             3,
         );
     });

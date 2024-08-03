@@ -35,7 +35,7 @@ describe('HomePage', () => {
         // Wait for async operations to complete
         await flushPromises();
 
-        const cards = component.findAllComponents('[data-test="post-card"]');
+        const cards = component.findAllComponents('[data-testid="post-card"]');
         expect(cards.length).toBe(postsMock.length);
 
         cards.forEach((card, index) => {
@@ -52,7 +52,7 @@ describe('HomePage', () => {
         // Wait for async operations to complete
         await flushPromises();
 
-        const firstCard = component.findComponent('[data-test="post-card"]');
+        const firstCard = component.findComponent('[data-testid="post-card"]');
         await firstCard.trigger('click');
 
         expect(navigateToMock).toHaveBeenCalledWith('/home/1');
