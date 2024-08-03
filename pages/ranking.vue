@@ -20,13 +20,12 @@
             </div>
 
             <div v-if="rankingMode === ERankingMode.LIST" data-test="list-view">
-                <div class="flex mb-6">
+                <div class="flex mb-6 gap-4">
                     <URadio
                         v-for="option in listOptions"
                         :key="option.value"
                         v-model="sortingOption"
                         v-bind="option"
-                        class="ml-4"
                         data-test="sorting-option"
                     />
                 </div>
