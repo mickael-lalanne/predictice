@@ -7,31 +7,31 @@
             title="It seems that no one has played yet."
             description="Go ahead and be the first to challenge others!"
             class="mb-4 dark:text-white max-w-[400px]"
-            data-test="no-results-message"
+            data-testid="no-results-message"
         />
 
         <div v-else>
             <div class="flex justify-end">
                 <UButton
                     label="Wan't to see an alternative ? 👀"
-                    data-test="alternative-button"
+                    data-testid="alternative-button"
                     @click="toggleRankingMode"
                 />
             </div>
 
-            <div v-if="rankingMode === ERankingMode.LIST" data-test="list-view">
+            <div v-if="rankingMode === ERankingMode.LIST" data-testid="list-view">
                 <div class="flex mb-6 gap-4">
                     <URadio
                         v-for="option in listOptions"
                         :key="option.value"
                         v-model="sortingOption"
                         v-bind="option"
-                        data-test="sorting-option"
+                        data-testid="sorting-option"
                     />
                 </div>
 
                 <div v-for="(result, i) in sortedResultsList" :key="i" class="my-4">
-                    <div data-test="user-result">
+                    <div data-testid="user-result">
                         - {{ result.username }} :
                         <span class="text-primary italic">{{ result.result }} ms</span>
                     </div>
@@ -43,13 +43,13 @@
                 v-else
                 :columns="tableColumns"
                 :rows="resultsList"
-                data-test="table-view"
+                data-testid="table-view"
             />
 
             <UButton
                 label="Clear results"
                 class="mt-8"
-                data-test="clear-results-button"
+                data-testid="clear-results-button"
                 @click="clearResults"
             />
         </div>

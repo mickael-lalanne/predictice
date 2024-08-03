@@ -3,7 +3,7 @@
         v-if="showSquare"
         :style="squareStyle"
         class="absolute cursor-pointer select-none"
-        data-test="square"
+        data-testid="square"
         @click="onSquareClick"
     ></div>
 </template>

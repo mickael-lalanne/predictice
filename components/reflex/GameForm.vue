@@ -1,7 +1,12 @@
 <template>
     <div>
         <UFormGroup label="Player Name" class="mb-4">
-            <UInput v-model="username" placeholder="Bruce Wayne" maxlength="20" />
+            <UInput
+                v-model="username"
+                placeholder="Bruce Wayne"
+                maxlength="20"
+                data-testid="username-input"
+            />
         </UFormGroup>
 
         <UFormGroup label="Color" class="mb-4">
@@ -40,6 +45,7 @@
                 block
                 :disabled="startButtonDisabled"
                 @click="() => $emit('startGame')"
+                data-testid="play-button"
             />
         </UTooltip>
     </div>

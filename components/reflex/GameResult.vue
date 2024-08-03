@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div data-testid="result-box">
         <div class="text-center mt-20 mb-4">
             Congratulations {{ username }} !
         </div>

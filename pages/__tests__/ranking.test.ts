@@ -43,13 +43,13 @@ describe('RankingPage', () => {
         const wrapper = mount(RankingPage);
         await flushPromises();
 
-        const button = wrapper.find('[data-test="alternative-button"]');
+        const button = wrapper.find('[data-testid="alternative-button"]');
 
         await button.trigger('click');
-        expect(wrapper.find('[data-test="table-view"]').exists()).toBe(true);
+        expect(wrapper.find('[data-testid="table-view"]').exists()).toBe(true);
 
         await button.trigger('click');
-        expect(wrapper.find('[data-test="list-view"]').exists()).toBe(true);
+        expect(wrapper.find('[data-testid="list-view"]').exists()).toBe(true);
     });
 
     it('sorts the results list correctly', async () => {
@@ -59,15 +59,15 @@ describe('RankingPage', () => {
 
         const wrapper = mount(RankingPage);
         await flushPromises();
-        const radios = wrapper.findAll('[data-test="sorting-option"]');
+        const radios = wrapper.findAll('[data-testid="sorting-option"]');
 
         await radios[1].setValue('desc');
-        expect(wrapper.find('[data-test="user-result"]').text()).toContain(
+        expect(wrapper.find('[data-testid="user-result"]').text()).toContain(
             'Player2',
         );
 
         await radios[0].setValue('asc');
-        expect(wrapper.find('[data-test="user-result"]').text()).toContain(
+        expect(wrapper.find('[data-testid="user-result"]').text()).toContain(
             'Player1',
         );
     });
@@ -79,7 +79,7 @@ describe('RankingPage', () => {
 
         const wrapper = mount(RankingPage);
 
-        expect(wrapper.find('[data-test="no-results-message"]').exists()).toBe(true);
+        expect(wrapper.find('[data-testid="no-results-message"]').exists()).toBe(true);
     });
 
     it('clears the results list', async () => {
@@ -91,10 +91,10 @@ describe('RankingPage', () => {
         await flushPromises();
 
         expect(clearResultsMock).toHaveBeenCalledTimes(0);
-        const button = wrapper.find('[data-test="clear-results-button"]');
+        const button = wrapper.find('[data-testid="clear-results-button"]');
 
         await button.trigger('click');
         expect(clearResultsMock).toHaveBeenCalledOnce();
-        expect(wrapper.find('[data-test="no-results-message"]').exists()).toBe(true);
+        expect(wrapper.find('[data-testid="no-results-message"]').exists()).toBe(true);
     });
 });

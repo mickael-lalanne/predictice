@@ -17,12 +17,12 @@ describe('GameSquare', () => {
         const wrapper = mount(GameSquare, mountOptions);
 
         // The square should not be shown initially
-        expect(wrapper.find('[data-test="square"]').exists()).toBe(false);
+        expect(wrapper.find('[data-testid="square"]').exists()).toBe(false);
 
         // Wait for the square to be displayed
         await new Promise(resolve => setTimeout(resolve, delay * 1000));
 
-        expect(wrapper.find('[data-test="square"]').exists()).toBe(true);
+        expect(wrapper.find('[data-testid="square"]').exists()).toBe(true);
     });
 
     it('emits squareClick event with a score when clicked', async () => {
