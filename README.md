@@ -30,6 +30,13 @@
         <li><a href="#installation-🛠️">Installation 🛠️</a></li>
       </ul>
     </li>
+    <li>
+      <a href="#run-tests-🤖">Run tests 🤖</a>
+      <ul>
+        <li><a href="#unit-tests">Unit tests</a></li>
+        <li><a href="#end-to-end-tests">End to end tests</a></li>
+      </ul>
+    </li>
     <li><a href="#contact-☎️">Contact ☎️</a></li>
   </ol>
 </details>
@@ -79,7 +86,9 @@ And also [Nuxt UI](https://ui.nuxt.com/) for the Design library and [Vitest](htt
    npm run dev
    ```
 
-### Run tests 🤖
+## Run tests 🤖
+
+### Unit tests
 
 Run test locally
    ```sh
@@ -93,6 +102,22 @@ Then, if you want to to look at the report
    ```sh
    npx vite preview --outDir html
    ```
+  
+### End to end tests
+
+Run test locally
+   ```sh
+   npx playwright test
+   ```
+You can use the UI mode for easier debugging
+   ```sh
+   npx playwright test --ui
+   ```
+To open last HTML report :
+   ```sh
+   npx playwright show-report
+   ```
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
