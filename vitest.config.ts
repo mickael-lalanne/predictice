@@ -5,5 +5,6 @@ export default defineVitestConfig({
     test: {
         environment: 'nuxt',
         setupFiles: './vitest.setup.ts',
+        exclude: ['**/e2e/**', '**/node_modules/**'],
     },
 });
